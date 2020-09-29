@@ -4,6 +4,8 @@
 
 برای نوشتن کد عامل به زبان پایتون، کلاسی با نام دل‌خواه تعریف کنید که از `BaseAgent` ارث‌بری می‌کند:
 
+</div>
+
 ```python
 from base import BaseAgent, TurnData, Action
 
@@ -11,7 +13,11 @@ class Agent(BaseAgent):
     ...
 ```
 
+<div dir="rtl">
+
 در این کلاس، شما باید متد `do_turn` را بازنویسی کنید. ورودی این متد، یک شئ از کلاس `TurnData` است و خروجی آن هم یک `Action`. به عنوان مثال، کد زیر همواره جهت پایین را برای حرکت عامل انتخاب می‌کند:
+
+</div>
 
 ```python
 from base import BaseAgent, TurnData, Action
@@ -21,6 +27,8 @@ class Agent(BaseAgent):
     def do_turn(self, turn_data: TurnData) -> Action:
         return Action.DOWN
 ```
+
+<div dir="rtl">
 
 در شئ `turn_data`، اطلاعات حالت فعلی محیط قرار دارد که شامل موارد زیر است:
 

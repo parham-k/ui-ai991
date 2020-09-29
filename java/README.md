@@ -4,6 +4,8 @@
 
 برای نوشتن کد عامل به زبان جاوا، کلاسی با نام دل‌خواه تعریف کنید که از `BaseAgent` ارث‌بری می‌کند:
 
+</div>
+
 ```java
 import base.Action;
 import base.AgentData;
@@ -19,7 +21,11 @@ public class Agent extends BaseAgent {
 }
 ```
 
+<div dir="rtl">
+
 در این کلاس، شما باید متد `doTurn` را بازنویسی کنید. ورودی این متد، یک شئ از کلاس `TurnData` است و خروجی آن هم یک `Action`. به عنوان مثال، کد زیر همواره جهت پایین را برای حرکت عامل انتخاب می‌کند:
+
+</div>
 
 ```java
 import base.Action;
@@ -40,6 +46,8 @@ public class Agent extends BaseAgent {
 
 }
 ```
+
+<div dir="rtl">
 
 در شئ `turnData`، اطلاعات حالت فعلی محیط قرار دارد که شامل موارد زیر است:
 
