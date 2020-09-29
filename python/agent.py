@@ -1,3 +1,4 @@
+import random
 from base import BaseAgent, TurnData, Action
 
 
@@ -12,7 +13,16 @@ class Agent(BaseAgent):
             print(f"COLLECTED: {agent.collected}")
         for row in turn_data.map:
             print(''.join(row))
-        return Action.DOWN
+        action_name = input("> ").upper()
+        if action_name == "U":
+            return Action.UP
+        if action_name == "D":
+            return Action.DOWN
+        if action_name == "L":
+            return Action.LEFT
+        if action_name == "R":
+            return Action.RIGHT
+        return random.choice(list(Action))
 
 
 if __name__ == '__main__':

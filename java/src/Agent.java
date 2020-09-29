@@ -5,8 +5,11 @@ import base.TurnData;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Agent extends BaseAgent {
+
+    private final Scanner scanner = new Scanner(System.in);
 
     public Agent() throws IOException {
         super();
@@ -26,7 +29,17 @@ public class Agent extends BaseAgent {
                 System.out.print(turnData.map[i][j]);
             System.out.println();
         }
-        return Action.UP;
+        System.out.print("> ");
+        String actionName = scanner.next().toUpperCase();
+        if (actionName.equals("U"))
+            return Action.UP;
+        if (actionName.equals("D"))
+            return Action.DOWN;
+        if (actionName.equals("L"))
+            return Action.LEFT;
+        if (actionName.equals("R"))
+            return Action.RIGHT;
+        return Action.values()[(int) (Math.random() * Action.values().length)];
     }
 
     public static void main(String[] args) {

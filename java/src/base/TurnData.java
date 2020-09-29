@@ -1,7 +1,5 @@
 package base;
 
-import java.util.Map;
-
 public class TurnData {
 
     public final int turnsLeft;
