@@ -12,6 +12,7 @@ public abstract class BaseAgent {
     private final DataOutputStream outputStream;
     public final String name;
     public final int agentCount, gridSize, maxTurns;
+    public final float decisionTimeLimit;
 
     public BaseAgent() throws IOException {
         Socket connection = new Socket("127.0.0.1", 9921);
@@ -21,6 +22,7 @@ public abstract class BaseAgent {
         agentCount = Integer.parseInt(inputStream.readUTF());
         gridSize = Integer.parseInt(inputStream.readUTF());
         maxTurns = Integer.parseInt(inputStream.readUTF());
+        decisionTimeLimit = Float.parseFloat(inputStream.readUTF());
     }
 
     private TurnData readTurnData(String firstLine) throws IOException {
