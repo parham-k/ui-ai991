@@ -46,7 +46,11 @@ class BaseAgent(metaclass=abc.ABCMeta):
         self.agent_count = int(read_utf(self.connection))
         self.grid_size = int(read_utf(self.connection))
         self.max_turns = int(read_utf(self.connection))
-        self.decision_time_limit = float(read_utf(self.connection))
+        decision_time_limit_str = read_utf(self.connection)
+        if decision_time_limit_str == 'None':
+            self.decision_time_limit = float('inf')
+        else:
+            self.decision_time_limit = float(decision_time_limit_str)
 
     def _read_turn_data(self, first_line: str) -> TurnData:
         turns_left = int(first_line)

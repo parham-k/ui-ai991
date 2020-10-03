@@ -13,6 +13,11 @@ public class Agent extends BaseAgent {
 
     public Agent() throws IOException {
         super();
+        System.out.println("MY NAME: " + name);
+        System.out.println("PLAYER COUNT: " + agentCount);
+        System.out.println("GRID SIZE: " + gridSize);
+        System.out.println("MAX TURNS: " + maxTurns);
+        System.out.println("DECISION TIME LIMIT: " + decisionTimeLimit);
     }
 
     @Override
