@@ -49,6 +49,8 @@ public class Agent extends BaseAgent {
 
 <div dir="rtl">
 
+<strong>بسته‌ی `base` در فایل فشرده قرار دارد. آن را دانلود و در پروژه‌ی خود `import` کنید.</strong>
+
 در شئ `turnData`، اطلاعات حالت فعلی محیط قرار دارد که شامل موارد زیر است:
 
 <ul>
