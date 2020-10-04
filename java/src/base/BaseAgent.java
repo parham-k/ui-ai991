@@ -47,7 +47,7 @@ public abstract class BaseAgent {
             if (!info[3].equals("-")) {
                 collected = new int[info[3].length()];
                 for (int j = 0; j < collected.length; j++)
-                    collected[j] = Integer.parseInt(info[3].split(" ")[j]);
+                    collected[j] = Integer.parseInt(info[3].split("")[j]);
             }
             agentData[i] = new AgentData(name, position, carrying, collected);
         }
