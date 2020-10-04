@@ -1,6 +1,8 @@
 # Python Client
 
 <div dir="rtl">
+    
+<strong dir="rtl">فایل `base.py` را دانلود و `import` کنید.</strong>
 
 برای نوشتن کد عامل به زبان پایتون، کلاسی با نام دل‌خواه تعریف کنید که از `BaseAgent` ارث‌بری می‌کند:
 
