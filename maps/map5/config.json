@@ -1,0 +1,6 @@
+{
+  "player_count": 1,
+  "grid_size": 5,
+  "max_turns": 30,
+  "turn_sleep_time": 0
+}
