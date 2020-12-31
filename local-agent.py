@@ -13,7 +13,6 @@ def find_targets(given_map, max_grid, targets):
                     #if i in given_map[k]:
                     locations.append([x, y])
     #returning positions which has been found in the map
-    print(locations)
     if len(locations) == 0:
         return
     return locations
@@ -54,17 +53,41 @@ def find_closest_goal(current_pos, max_grid, goal_targets):
     reader.close()
 
     coords_of_targets = find_targets(actual_map, max_grid, goal_targets)
+    #lines below is just for making the variables available for latter in code (closest_coord, closest_coord_weight)
     closest_coord = coords_of_targets[0]
     weight_map = []
     with open("weight_map.txt", "r") as reader:
         weight_map = json.load(reader)
     reader.close()
     closest_coord_weight = weight_map[coords_of_targets[0][0]][coords_of_targets[0][1]]
+    first_xy = [coords_of_targets[0][0], coords_of_targets[0][1]]
 
     for items in coords_of_targets:
         if weight_map[items[0]][items[1]] < closest_coord_weight:
+            first_xy = [items[0], items[1]]
             closest_coord = items
             closest_coord_weight = weight_map[items[0]][items[1]]
+        elif weight_map[items[0]][items[1]] == closest_coord_weight:
+            #when weights are same have to do a tie break with score
+            second_xy = [items[0], items[1]]
+            first_ID = actual_map[first_xy[0]][first_xy[1]]
+            second_ID = actual_map[second_xy[0]][second_xy[1]]
+            score_translatetor = {
+                '4' : 10,
+                '1' : 5,
+                '2' : 3,
+                '0' : 2,
+                '3' : 1,
+                'a' : 0,
+            }
+            first_score = score_translatetor[first_ID]
+            second_score = score_translatetor[second_ID]
+            if first_score > second_score:
+                closest_coord = first_xy
+            else:
+                closest_coord = second_xy
+
+
     return closest_coord
 
 
@@ -161,11 +184,12 @@ class Agent(BaseAgent):
 
     def __init__(self):
         BaseAgent.__init__(self)
+        '''
         print(f"MY NAME: {self.name}")
         print(f"PLAYER COUNT: {self.agent_count}")
         print(f"GRID SIZE: {self.grid_size}")
         print(f"MAX TURNS: {self.max_turns}")
-        print(f"DECISION TIME LIMIT: {self.decision_time_limit}")
+        print(f"DECISION TIME LIMIT: {self.decision_time_limit}")'''
         self.lookingForGem = True
         self.moveTowardsTheGem = False
         self.lookingForStation = False
@@ -197,7 +221,7 @@ class Agent(BaseAgent):
     #####################################################################
 
         if self.startOver:
-            #print("Start Over")
+            print("Start Over")
             self.lookingForGem = True
             self.moveTowardsTheGem = False
             self.lookingForStation = False
@@ -207,9 +231,20 @@ class Agent(BaseAgent):
             self.startOver = False
 
     ######################################################################
+        '''
+        if agent.carrying != 'None':
+            self.lookingForGem = False
+            self.moveTowardsTheGem = False
+            self.lookingForStation = True
+            self.moveTowardsTheStation = True
+            self.checkForDestinationOfGem = False
+            self.checkForDestinationOfStation = False
+            self.startOver = False
+        '''
+    ######################################################################
 
         if self.lookingForGem:
-            #print("looking for gem")
+            print("looking for gem")
             if agent.carrying != None:
                 self.moveTowardsTheGem = True
                 self.lookingForGem = False
@@ -242,6 +277,7 @@ class Agent(BaseAgent):
     ###########################################################################
 
         if self.checkForDestinationOfGem:
+            print("checkForDestinationOfGem")
             if agent.carrying != None:
                 self.checkForDestinationOfGem = False
                 self.moveTowardsTheGem = False
@@ -258,7 +294,7 @@ class Agent(BaseAgent):
     ############################################################################
 
         if self.moveTowardsTheGem:
-            #print("move toward the gem")
+            print("move toward the gem")
             if agent.carrying != None:
                 self.checkForDestinationOfGem = False
                 self.moveTowardsTheGem = False
@@ -273,7 +309,7 @@ class Agent(BaseAgent):
 
         closest_station = []
         if self.lookingForStation:
-            #print("looking for station")
+            print("looking for station")
             #We got the gem. Now let's find the closest station
             with open("actual_map.txt", "r") as reader:
                 turn_data.map = json.load(reader)
@@ -301,7 +337,7 @@ class Agent(BaseAgent):
     #################################################################################
 
         if self.moveTowardsTheStation:
-            #print("move towards the station")
+            print("move towards the station")
             #starting to move towards the Gem
             with open("path_map.txt", "r") as reader:
                 path_map = json.load(reader)
@@ -313,6 +349,7 @@ class Agent(BaseAgent):
     ##################################################################################
 
         if self.checkForDestinationOfStation:
+            print("check For Destination Of Station")
             with open("closest_station.txt", "r") as reader:
                 closest_station = json.load(reader)
             reader.close()
@@ -323,7 +360,6 @@ class Agent(BaseAgent):
                 self.checkForDestinationOfStation = False
 
     ##################################################################################
-
         #action_name = input("> ").upper()
         if action_name == "U":
             return Action.UP
